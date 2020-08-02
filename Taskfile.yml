@@ -1,0 +1,11 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  default:
+    cmds:
+      - rm -f out/main
+      - go build -o out/main src/main.go
+      - ./out/main
+    silent: true
