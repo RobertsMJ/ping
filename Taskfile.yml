@@ -1,12 +1,19 @@
 # https://taskfile.dev
 
-version: '2'
+version: "2"
+
+env:
+  DOTA_PATH: ~/.local/share/Steam/steamapps/common/dota\ 2\ beta/game/dota
 
 tasks:
   default:
     cmds:
-      - mkdir -p out
-      - rm -f out/main
+      - rm out/*
       - go build -o out/main src/main.go
       - ./out/main
     silent: true
+  copy-replays:
+    cmds:
+      - rm -f replays/*
+      - cp -r ~/.local/share/Steam/steamapps/common/dota\ 2\ beta/game/dota/replays .
+      - rm replays/placeholder.txt
