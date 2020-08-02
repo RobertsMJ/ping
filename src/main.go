@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// Create a new parser instance from a file. Alternatively see NewParser([]byte)
 	var files []string
 	err := filepath.Walk("replays", func(path string, info os.FileInfo, err error) error {
 		// skip folders
@@ -25,7 +24,6 @@ func main() {
 		log.Fatal("error walking replay dir")
 	}
 
-	log.Print("starting")
 	for _, file := range files {
 		log.Printf("replay: %s", file)
 		f, err := os.Open(file)
@@ -39,7 +37,6 @@ func main() {
 			log.Fatalf("unable to create parser: %s", err)
 		}
 
-		// Register a callback, this time for the OnCUserMessageSayText2 event.
 		p.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
 			log.Printf("%s said: %s\n", m.GetParam1(), m.GetParam2())
 			return nil
@@ -74,7 +71,6 @@ func main() {
 		p.Start()
 
 		log.Printf("parse complete\n")
-
 	}
 
 }
