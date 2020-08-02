@@ -5,6 +5,7 @@ version: '2'
 tasks:
   default:
     cmds:
+      - mkdir -p out
       - rm -f out/main
       - go build -o out/main src/main.go
       - ./out/main
