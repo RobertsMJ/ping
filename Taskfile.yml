@@ -2,18 +2,25 @@
 
 version: "2"
 
-env:
-  DOTA_PATH: ~/.local/share/Steam/steamapps/common/dota\ 2\ beta/game/dota
-
 tasks:
   default:
     cmds:
-      - rm out/*
+      - mkdir -p out
+      - rm -f out/*
       - go build -o out/main src/main.go
       - ./out/main
-    silent: true
-  copy-replays:
+    silent: false
+  gen-config:
     cmds:
+      - echo "export DOTA_PATH=replace_me" > env.local.sh
+  set-env:
+    cmds:
+      - source env.local.sh
+  copy-replays:
+    deps:
+      - set-env
+    cmds:
+      - mkdir -p replays
       - rm -f replays/*
-      - cp -r ~/.local/share/Steam/steamapps/common/dota\ 2\ beta/game/dota/replays .
+      - cp -r "{{.DOTA_PATH}}"/replays .
       - rm replays/placeholder.txt

@@ -38,33 +38,7 @@ func main() {
 		}
 
 		p.Callbacks.OnCUserMessageSayText2(func(m *dota.CUserMessageSayText2) error {
-			log.Printf("%s said: %s\n", m.GetParam1(), m.GetParam2())
-			return nil
-		})
-
-		// Register a callback for map pings
-		p.Callbacks.OnCDOTAUserMsg_LocationPing(func(ping *dota.CDOTAUserMsg_LocationPing) error {
-			location := ping.GetLocationPing()
-			log.Printf("%d pinged at (%d, %d)", ping.GetPlayerId(), location.GetX(), location.GetY())
-			return nil
-		})
-
-		// Never called?
-		p.Callbacks.OnCDOTAUserMsg_AbilityPing(func(ping *dota.CDOTAUserMsg_AbilityPing) error {
-			log.Printf("%d ability-pinged %d", ping.GetPlayerId(), ping.GetAbilityId())
-			return nil
-		})
-
-		// Never called?
-		p.Callbacks.OnCDOTAUserMsg_ItemAlert(func(itemalert *dota.CDOTAUserMsg_ItemAlert) error {
-			alert := itemalert.GetItemAlert()
-			log.Printf("%d item-alerted %d", itemalert.GetPlayerId(), alert.GetItemAbilityId())
-			return nil
-		})
-
-		// Never called?
-		p.Callbacks.OnCDOTAUserMsg_EnemyItemAlert(func(itemalert *dota.CDOTAUserMsg_EnemyItemAlert) error {
-			log.Printf("%d enemy-item-alerted %d's %d", itemalert.GetPlayerId(), itemalert.GetTargetPlayerId(), itemalert.GetItemAbilityId())
+			log.Printf("%s > %s said: %s\n", file, m.GetParam1(), m.GetParam2())
 			return nil
 		})
 
